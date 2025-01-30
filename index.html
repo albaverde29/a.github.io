@@ -34,7 +34,7 @@
         <a-plane position="0 0 -2" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
         <!-- Testo AR -->
-        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="1 1 1" position="0 1.5 -2" align="center"></a-text>
+        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="1 1 1" position="0 1 -2" align="center"></a-text>
 
         <a-entity camera></a-entity>
     </a-scene>
@@ -45,17 +45,16 @@
         const inputText = document.getElementById('inputText');
         const arText = document.getElementById('arText');
 
-        // Funzione per calcolare dinamicamente la larghezza e la scala
+        // Funzione per aggiornare il testo e regolare la scala
         function updateTextDisplay(text) {
-            // Impostiamo il testo
+            // Aggiorniamo il testo visibile in AR
             arText.setAttribute('value', text);  
 
-            // Scala moderata, evitando valori troppo grandi
-            arText.setAttribute('scale', '1 1 1');  // Scala moderata per visibilità
+            // Manteniamo una scala fissa moderata
+            arText.setAttribute('scale', '2 2 2');  // Scala moderata per visibilità
 
-            // Posizioniamo il testo a una distanza corretta dalla fotocamera
-            arText.setAttribute('position', '0 1.5 -2'); // Posizione corretta per visibilità
-
+            // Posizioniamo il testo vicino al piano, a una distanza visibile
+            arText.setAttribute('position', '0 1 -2'); // Posizione vicino alla fotocamera
         }
 
         // Quando l'utente scrive, il testo in AR viene aggiornato
@@ -67,6 +66,9 @@
 </body>
 </html>
 
+
+
+    
 
 
 
