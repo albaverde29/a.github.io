@@ -44,22 +44,37 @@
         const inputText = document.getElementById('inputText');
         const arText = document.getElementById('arText');
         
+        // Funzione per calcolare dinamicamente la scala
+        function updateTextScale(text) {
+            let scaleFactor = 1;
+
+            // Se il testo è troppo lungo, riduci la scala
+            if (text.length > 50) {
+                scaleFactor = 0.8;
+            } else if (text.length > 30) {
+                scaleFactor = 1;
+            } else {
+                scaleFactor = 1.5;  // Scala più grande per testi più brevi
+            }
+
+            // Impostiamo la scala dinamicamente
+            arText.setAttribute('scale', `${scaleFactor} ${scaleFactor} ${scaleFactor}`);
+        }
+
         // Quando l'utente scrive, il testo in AR viene aggiornato
         inputText.addEventListener('input', function() {
-            arText.setAttribute('value', inputText.value);
-            
-            // Se il testo è troppo lungo, limita la larghezza e la scala
-            if(inputText.value.length > 30) {
-                arText.setAttribute('scale', '2 2 2');  // Ridurre la scala per testi più lunghi
-                arText.setAttribute('wrap-count', '20');  // Limita la larghezza
-            } else {
-                arText.setAttribute('scale', '3 3 3');  // Scala più grande per testi brevi
-                arText.setAttribute('wrap-count', '10');  // Utilizza meno wrap per testi più brevi
-            }
+            const userInput = inputText.value;
+            arText.setAttribute('value', userInput);
+
+            // Aggiorniamo la scala in base alla lunghezza del testo
+            updateTextScale(userInput);
         });
     </script>
 </body>
 </html>
+
+     
+
 
 
  
