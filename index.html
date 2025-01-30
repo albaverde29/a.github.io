@@ -33,7 +33,7 @@
         <a-plane position="0 0 -2" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
         <!-- Testo AR con limitazione della larghezza -->
-        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="5 5 5" position="0 1 -3" align="center" anchor="center" wrap-count="20"></a-text>
+        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="2 2 2" position="0 1 -3" align="center" wrap-count="20"></a-text>
 
         <a-entity camera></a-entity>
     </a-scene>
@@ -47,9 +47,22 @@
         // Quando l'utente scrive, il testo in AR viene aggiornato
         inputText.addEventListener('input', function() {
             arText.setAttribute('value', inputText.value);
+            
+            // Limitare la larghezza del testo per evitare che diventi troppo grande
+            if(inputText.value.length > 20) {
+                // Impostare una larghezza fissa
+                arText.setAttribute('scale', '2 2 2');
+                arText.setAttribute('wrap-count', '20');  // Dopo 20 caratteri, il testo va su una nuova riga
+            } else {
+                arText.setAttribute('scale', '3 3 3');  // Scala più grande per brevi testi
+                arText.setAttribute('wrap-count', '10'); // Impostiamo un wrap più corto
+            }
         });
     </script>
 </body>
 </html>
+
+
+
 
  
