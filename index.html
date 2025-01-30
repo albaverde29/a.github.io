@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Text on Desk</title>
+    <title>AR Text senza marker</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
     <style>
@@ -18,11 +18,14 @@
     </style>
 </head>
 <body>
-    <a-scene embedded arjs>
-        <!-- Definisci il piano AR dove apparirà il testo -->
-        <a-marker preset="hiro">
-            <a-text value="Ciao" color="#FF0000" scale="2 2 2" position="0 0 0"></a-text>
-        </a-marker>
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+        <!-- Aggiungi un piano per dare un'idea di superficie (simulando la scrivania) -->
+        <a-plane position="0 0 -2" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+
+        <!-- Il testo che si "posiziona" liberamente sulla scena -->
+        <a-text value="Ciao" color="#FF0000" scale="2 2 2" position="0 1 -3"></a-text>
+
+        <!-- Telecamera per visualizzare la scena -->
         <a-entity camera></a-entity>
     </a-scene>
 </body>
