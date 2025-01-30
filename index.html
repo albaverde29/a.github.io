@@ -11,9 +11,8 @@
             margin: 0;
             overflow: hidden;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
         }
         #scene {
@@ -28,42 +27,32 @@
     </style>
 </head>
 <body>
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;">
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
         <!-- Piano che simula la superficie della scrivania -->
         <a-plane position="0 0 -2" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
         <!-- Testo AR -->
-        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="2 2 2" position="0 1 -2" align="center"></a-text>
+        <a-text id="arText" value="Testo visibile in AR" color="#FF0000" scale="2 2 2" position="0 1 -2" align="center"></a-text>
 
         <a-entity camera></a-entity>
     </a-scene>
-    
+
     <input type="text" id="inputText" placeholder="Modifica il testo" />
-    
+
     <script>
         const inputText = document.getElementById('inputText');
         const arText = document.getElementById('arText');
 
-        // Funzione per aggiornare il testo e regolare la scala
-        function updateTextDisplay(text) {
-            // Aggiorniamo il testo visibile in AR
-            arText.setAttribute('value', text);  
-
-            // Scala moderata, evitando valori troppo grandi
-            arText.setAttribute('scale', '2 2 2');  // Scala moderata per visibilità
-
-            // Posizioniamo il testo vicino al piano, a una distanza visibile
-            arText.setAttribute('position', '0 1.5 -3'); // Posizione abbastanza vicina alla fotocamera
-        }
-
-        // Quando l'utente scrive, il testo in AR viene aggiornato
+        // Funzione per aggiornare il testo in AR
         inputText.addEventListener('input', function() {
             const userInput = inputText.value;
-            updateTextDisplay(userInput);
+            arText.setAttribute('value', userInput); // Aggiorna il testo
         });
     </script>
 </body>
 </html>
+
+
 
 
 
