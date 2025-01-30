@@ -44,50 +44,30 @@
         const inputText = document.getElementById('inputText');
         const arText = document.getElementById('arText');
         
-        // Funzione per aggiornare il testo e adattarlo alla scena
-        function updateTextScale(text) {
-            // Calcolare una scala dinamica in base alla lunghezza del testo
-            let scaleFactor = 1;
+        // Funzione per calcolare dinamicamente la larghezza e la scala
+        function updateTextDisplay(text) {
+            // Controllo lunghezza del testo
+            const maxLength = 30;  // Numero massimo di caratteri per riga
+            const scaleFactor = Math.max(0.5, Math.min(2, 1 + (text.length / 30) * 0.5)); // Scala dinamica
 
-            // Ridurre la scala se il testo è troppo lungo
-            if (text.length > 50) {
-                scaleFactor = 0.5;  // Ridurre la scala se il testo è molto lungo
-            } else if (text.length > 30) {
-                scaleFactor = 0.75; // Scala intermedia
-            } else {
-                scaleFactor = 1.25; // Scala più grande per testi brevi
-            }
-
-            // Aggiorniamo la scala del testo
-            arText.setAttribute('scale', `${scaleFactor} ${scaleFactor} ${scaleFactor}`);
-            // Impostiamo il valore del testo
-            arText.setAttribute('value', text);
-        }
-
-        // Funzione per mantenere il testo visibile nella scena
-        function updateTextPosition() {
-            const currentText = inputText.value;
-            let newPosition = -3;
-
-            // Se il testo è lungo, avviciniamo il testo alla fotocamera per mantenerlo visibile
-            if (currentText.length > 40) {
-                newPosition = -2; // Avvicina il testo se è troppo lungo
-            } else {
-                newPosition = -3; // Posizione standard
-            }
-
-            arText.setAttribute('position', `0 1 ${newPosition}`);
+            // Se il testo è troppo lungo, ridurre la scala e la posizione
+            arText.setAttribute('value', text);  // Impostiamo il testo
+            arText.setAttribute('scale', `${scaleFactor} ${scaleFactor} ${scaleFactor}`); // Scala dinamica
+            arText.setAttribute('position', `0 1 -3`); // Posizioniamo il testo a una distanza adeguata dalla fotocamera
         }
 
         // Quando l'utente scrive, il testo in AR viene aggiornato
         inputText.addEventListener('input', function() {
             const userInput = inputText.value;
-            updateTextScale(userInput);
-            updateTextPosition();
+            updateTextDisplay(userInput);
         });
     </script>
 </body>
 </html>
+
+  
+   
+
 
       
 
