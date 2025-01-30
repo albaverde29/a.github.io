@@ -4,20 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR Letter "A" on Desk</title>
+  <!-- A-Frame Library -->
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <!-- AR.js Library -->
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
 </head>
-<body style="margin: 0; overflow: hidden;">
+<body>
   <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;" vr-mode-ui="enabled: false">
-    
-    <!-- Superficie del piano (scrivania) -->
-    <a-plane position="0 0 0" width="1" height="1" color="#7BC8A4" opacity="0.5"></a-plane>
-
-    <!-- Lettera 3D "A" -->
-    <a-text value="A" position="0 0.5 0" rotation="0 0 0" color="red" scale="2 2 2"></a-text>
-
     <!-- Camera -->
     <a-entity camera></a-entity>
+
+    <!-- Surface Detection (Plane detection) -->
+    <a-entity id="surface" position="0 0 0" arjs-anchor="type: surface; planeDetection: true;">
+      <!-- Lettera "A" in 3D -->
+      <a-text value="A" position="0 0.5 0" rotation="0 0 0" color="red" scale="3 3 3"></a-text>
+    </a-entity>
+    
+    <!-- Optional: Light source -->
+    <a-light type="directional" intensity="1" position="2 4 -3"></a-light>
   </a-scene>
 </body>
 </html>
