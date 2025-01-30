@@ -33,7 +33,7 @@
         <a-plane position="0 0 -2" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
         <!-- Testo AR -->
-        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="1 1 1" position="0 1.5 -2" align="center"></a-text>
+        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="2 2 2" position="0 1.5 -3" align="center"></a-text>
 
         <a-entity camera></a-entity>
     </a-scene>
@@ -44,22 +44,16 @@
         const inputText = document.getElementById('inputText');
         const arText = document.getElementById('arText');
 
-        // Funzione per calcolare dinamicamente la larghezza e la scala
+        // Funzione per aggiornare il testo
         function updateTextDisplay(text) {
-            const maxLength = 30;  // Numero massimo di caratteri per riga
-            const scaleFactor = Math.max(0.5, Math.min(1.5, 1 + (text.length / 30) * 0.3)); // Scala dinamica
+            // Impostiamo la scala e la posizione in modo che il testo sia visibile
+            arText.setAttribute('value', text);  // Impostiamo il testo
 
-            // Impostiamo il testo e la scala
-            arText.setAttribute('value', text);  
-            arText.setAttribute('scale', `${scaleFactor} ${scaleFactor} ${scaleFactor}`);
+            // Scala fissa per il testo
+            arText.setAttribute('scale', '2 2 2');  // Scala fissa per visibilità
 
-            // Posizioniamo il testo in modo che sia più visibile su mobile
-            // Spostiamo la posizione per avvicinare il testo alla fotocamera
-            if (window.innerWidth < 768) {  // Schermi più piccoli (mobile)
-                arText.setAttribute('position', `0 1.2 -1.5`); // Posizione più vicina alla fotocamera
-            } else {
-                arText.setAttribute('position', `0 1.5 -2`); // Posizione per desktop
-            }
+            // Posizione fissa per il testo, abbastanza lontano dalla fotocamera per visibilità
+            arText.setAttribute('position', '0 1.5 -3');  // Posizione centrale e a una distanza adeguata
         }
 
         // Quando l'utente scrive, il testo in AR viene aggiornato
@@ -70,6 +64,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
