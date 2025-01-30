@@ -21,29 +21,29 @@
     </style>
 </head>
 <body>
-    <!-- La scena AR -->
+    <!-- Scena AR -->
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
         <!-- Piano (scrivania) -->
         <a-plane position="0 0 -2" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
-        <!-- Testo in AR -->
+        <!-- Testo AR -->
         <a-text id="arText" value="Testo AR" color="#FF0000" position="0 1 -2" scale="3 3 3" align="center"></a-text>
 
         <!-- Fotocamera -->
         <a-entity camera></a-entity>
     </a-scene>
 
-    <!-- Input per modificare il testo -->
+    <!-- Campo di input per modificare il testo -->
     <input type="text" id="inputText" placeholder="Scrivi qualcosa" />
 
     <script>
         const inputText = document.getElementById('inputText');
         const arText = document.getElementById('arText');
 
-        // Aggiorna il testo quando l'utente scrive
+        // Quando l'utente scrive, aggiorniamo il testo nella scena AR
         inputText.addEventListener('input', function() {
             const userInput = inputText.value;
-            arText.setAttribute('value', userInput); // Modifica il testo
+            arText.setAttribute('value', userInput); // Cambia il valore del testo in AR
         });
     </script>
 </body>
