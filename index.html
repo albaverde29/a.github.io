@@ -32,7 +32,7 @@
         <!-- Piano che simula la superficie della scrivania -->
         <a-plane position="0 0 -2" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
-        <!-- Testo AR con limitazione della larghezza -->
+        <!-- Testo AR -->
         <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="1 1 1" position="0 1.5 -2" align="center"></a-text>
 
         <a-entity camera></a-entity>
@@ -43,18 +43,23 @@
     <script>
         const inputText = document.getElementById('inputText');
         const arText = document.getElementById('arText');
-        
+
         // Funzione per calcolare dinamicamente la larghezza e la scala
         function updateTextDisplay(text) {
-            const maxLength = 40;  // Numero massimo di caratteri per riga
+            const maxLength = 30;  // Numero massimo di caratteri per riga
             const scaleFactor = Math.max(0.5, Math.min(1.5, 1 + (text.length / 30) * 0.3)); // Scala dinamica
 
             // Impostiamo il testo e la scala
             arText.setAttribute('value', text);  
             arText.setAttribute('scale', `${scaleFactor} ${scaleFactor} ${scaleFactor}`);
 
-            // Posizioniamo il testo ad un'altezza centrale e alla giusta distanza dalla fotocamera
-            arText.setAttribute('position', `0 1.5 -2`); 
+            // Posizioniamo il testo in modo che sia più visibile su mobile
+            // Spostiamo la posizione per avvicinare il testo alla fotocamera
+            if (window.innerWidth < 768) {  // Schermi più piccoli (mobile)
+                arText.setAttribute('position', `0 1.2 -1.5`); // Posizione più vicina alla fotocamera
+            } else {
+                arText.setAttribute('position', `0 1.5 -2`); // Posizione per desktop
+            }
         }
 
         // Quando l'utente scrive, il testo in AR viene aggiornato
@@ -65,6 +70,7 @@
     </script>
 </body>
 </html>
+
 
 
 
