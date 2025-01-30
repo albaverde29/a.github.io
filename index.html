@@ -29,12 +29,11 @@
 </head>
 <body>
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;">
-
         <!-- Piano che simula la superficie della scrivania -->
         <a-plane position="0 0 -2" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
         <!-- Testo AR -->
-        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="1 1 1" position="0 1 -2" align="center"></a-text>
+        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="2 2 2" position="0 1 -2" align="center"></a-text>
 
         <a-entity camera></a-entity>
     </a-scene>
@@ -50,11 +49,11 @@
             // Aggiorniamo il testo visibile in AR
             arText.setAttribute('value', text);  
 
-            // Manteniamo una scala fissa moderata
+            // Scala moderata, evitando valori troppo grandi
             arText.setAttribute('scale', '2 2 2');  // Scala moderata per visibilità
 
             // Posizioniamo il testo vicino al piano, a una distanza visibile
-            arText.setAttribute('position', '0 1 -2'); // Posizione vicino alla fotocamera
+            arText.setAttribute('position', '0 1.5 -3'); // Posizione abbastanza vicina alla fotocamera
         }
 
         // Quando l'utente scrive, il testo in AR viene aggiornato
@@ -65,6 +64,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 
