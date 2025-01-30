@@ -33,7 +33,7 @@
         <a-plane position="0 0 -2" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
 
         <!-- Testo AR con limitazione della larghezza -->
-        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="3 3 3" position="0 1 -3" align="center" wrap-count="20"></a-text>
+        <a-text id="arText" value="Questo è un testo AR!" color="#FF0000" scale="2 2 2" position="0 1 -3" align="center"></a-text>
 
         <a-entity camera></a-entity>
     </a-scene>
@@ -44,34 +44,52 @@
         const inputText = document.getElementById('inputText');
         const arText = document.getElementById('arText');
         
-        // Funzione per calcolare dinamicamente la scala
+        // Funzione per aggiornare il testo e adattarlo alla scena
         function updateTextScale(text) {
+            // Calcolare una scala dinamica in base alla lunghezza del testo
             let scaleFactor = 1;
 
-            // Se il testo è troppo lungo, riduci la scala
+            // Ridurre la scala se il testo è troppo lungo
             if (text.length > 50) {
-                scaleFactor = 0.8;
+                scaleFactor = 0.5;  // Ridurre la scala se il testo è molto lungo
             } else if (text.length > 30) {
-                scaleFactor = 1;
+                scaleFactor = 0.75; // Scala intermedia
             } else {
-                scaleFactor = 1.5;  // Scala più grande per testi più brevi
+                scaleFactor = 1.25; // Scala più grande per testi brevi
             }
 
-            // Impostiamo la scala dinamicamente
+            // Aggiorniamo la scala del testo
             arText.setAttribute('scale', `${scaleFactor} ${scaleFactor} ${scaleFactor}`);
+            // Impostiamo il valore del testo
+            arText.setAttribute('value', text);
+        }
+
+        // Funzione per mantenere il testo visibile nella scena
+        function updateTextPosition() {
+            const currentText = inputText.value;
+            let newPosition = -3;
+
+            // Se il testo è lungo, avviciniamo il testo alla fotocamera per mantenerlo visibile
+            if (currentText.length > 40) {
+                newPosition = -2; // Avvicina il testo se è troppo lungo
+            } else {
+                newPosition = -3; // Posizione standard
+            }
+
+            arText.setAttribute('position', `0 1 ${newPosition}`);
         }
 
         // Quando l'utente scrive, il testo in AR viene aggiornato
         inputText.addEventListener('input', function() {
             const userInput = inputText.value;
-            arText.setAttribute('value', userInput);
-
-            // Aggiorniamo la scala in base alla lunghezza del testo
             updateTextScale(userInput);
+            updateTextPosition();
         });
     </script>
 </body>
 </html>
+
+      
 
      
 
