@@ -3,20 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR Alphabet on Desk</title>
+  <title>AR Letter on Desk</title>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
-  <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false;' vr-mode-ui="enabled: false">
-    <!-- Superficie del piano (desk) - attivazione del rilevamento dei piani -->
-    <a-plane position="0 0 0" width="1" height="1" color="#7BC8A4" opacity="0.5"></a-plane>
+  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; trackingMethod: best;" vr-mode-ui="enabled: false">
+    
+    <!-- Aggiungi una luce per illuminare la scena -->
+    <a-light type="directional" intensity="1" position="2 4 -3"></a-light>
 
-    <!-- Entità 3D che rappresenta una lettera -->
-    <a-box position="0 0.5 0" rotation="0 45 0" color="red" scale="0.3 0.3 0.3"></a-box>
-
-       <!-- Lettera 3D "A" -->
-    <a-text value="A" position="0 0.5 0" rotation="0 0 0" color="red" scale="5 5 5"></a-text>
+    <!-- Rilevamento dei piani - usa l'evento di AR.js per far rilevare un piano orizzontale come la scrivania -->
+    <a-entity 
+      id="plane" 
+      arjs-anchor="type: surface; planeDetection: true;" 
+      position="0 0 0">
+      
+      <!-- La lettera "A" come un box 3D -->
+      <a-text value="A" position="0 0.5 0" rotation="0 0 0" color="red" scale="2 2 2"></a-text>
+    </a-entity>
     
     <!-- Camera per la visualizzazione della scena -->
     <a-entity camera></a-entity>
